@@ -7,22 +7,38 @@ import { ImNpm } from "react-icons/im";
 // Asset's
 import logo from "../assets/images/dl_logo.png";
 
+//data
+import { data } from "../data/dataHeader";
+import React, { Component } from "react";
+
 const Header = () => {
   return (
     <header
       className="w-screen flex justify-around items-center h-20
-      shadow-2xl backdrop-blur-md">
+      shadow-2xl backdrop-blur-md"
+    >
       <div>
         <Image src={logo} width={250} alt="" priority={true} />
       </div>
 
       <nav
         className="flex items-center justify-center gap-2 text-white
-        text-xl">
-        <Link className="p-2 rounded-lg transition-all hover:bg-[#4e99c5]" href={""}>
-          Docs
-        </Link>
-        <Link className="p-2 rounded-lg transition-all hover:bg-[#4e99c5]" href={""}>
+        text-xl"
+      >
+        {data.socials.map((data) => {
+          return (
+            <Link
+              className="p-2 rounded-lg transition-all hover:bg-[#4e99c5]"
+              href={data.link}
+              key={data.index}
+            >
+              {typeof data.title === "string"
+                ? data.title
+                : React.createElement(data.title)}
+            </Link>
+          );
+        })}
+        {/* <Link className="p-2 rounded-lg transition-all hover:bg-[#4e99c5]" href={""}>
           Bibliotecas
         </Link>
         <Link className="p-2 rounded-lg transition-all hover:bg-[#4e99c5]" href={""}>
@@ -45,7 +61,7 @@ const Header = () => {
           href={"https://www.npmjs.com/package/delegua"}
         >
           <ImNpm size={25} />
-        </Link>
+        </Link> */}
       </nav>
     </header>
   );
